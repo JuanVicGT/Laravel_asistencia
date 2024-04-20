@@ -17,53 +17,23 @@
 </head>
 
 <body class="font-sans antialiased">
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        @include('layouts.navigation')
 
-    {{-- The navbar with `sticky` and `full-width` --}}
-    <x-mary-nav sticky full-width>
+        <!-- Page Heading -->
+        @if (isset($header))
+            <header class="bg-white dark:bg-gray-800 shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endif
 
-        <x-slot:brand>
-            {{-- Drawer toggle for "main-drawer" --}}
-            <label for="main-drawer" class="lg:hidden mr-3">
-                <x-mary-icon name="o-bars-3" class="cursor-pointer" />
-            </label>
-
-            {{-- Brand --}}
-            <div>App</div>
-        </x-slot:brand>
-
-        {{-- Right side actions --}}
-        <x-slot:actions>
-            <x-mary-button label="Messages" icon="o-envelope" link="###" class="btn-ghost btn-sm" responsive />
-            <x-mary-button label="Notifications" icon="o-bell" link="###" class="btn-ghost btn-sm" responsive />
-        </x-slot:actions>
-    </x-mary-nav>
-
-    {{-- The main content with `full-width` --}}
-    <x-mary-main with-nav full-width>
-
-        {{-- This is a sidebar that works also as a drawer on small screens --}}
-        {{-- Notice the `main-drawer` reference here --}}
-        <x-slot:sidebar drawer="main-drawer" collapsible class="bg-base-200">
-
-            {{-- Activates the menu item when a route matches the `link` property --}}
-            <x-mary-menu activate-by-route active-bg-color="bg-sky-500/20">
-                <x-mary-menu-item title="Home" icon="o-home" link="###" />
-                <x-mary-menu-item title="Messages" icon="o-envelope" link="###" />
-                <x-mary-menu-sub title="Settings" icon="o-cog-6-tooth">
-                    <x-mary-menu-item title="Wifi" icon="o-wifi" link="####" />
-                    <x-mary-menu-item title="Archives" icon="o-archive-box" link="{{ route('dashboard') }}" />
-                </x-mary-menu-sub>
-            </x-mary-menu>
-        </x-slot:sidebar>
-
-        {{-- The `$slot` goes here --}}
-        <x-slot:content>
+        <!-- Page Content -->
+        <main>
             {{ $slot }}
-        </x-slot:content>
-    </x-mary-main>
-
-    {{--  TOAST area --}}
-    <x-mary-toast />
+        </main>
+    </div>
 </body>
 
 </html>
